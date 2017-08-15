@@ -1,21 +1,19 @@
 # bip38
 
-Python 2.7 BIP38 paper wallet creator - emits a bip38-QR.jpg file.
+Python 2.7 BIP38 paper wallet creator
 
-A quick and dirty script using libraries: bip38, PIL, qrcode and bitcoin.
+BIP38 is a protocol which encrypts a bitcoin private key with a pass phrase (using AES and scrypt), such that 
+brute forcing will be very difficult / time consuming. This works with several wallets, and is used at sites 
+like bitcoinpaperwallet.com and bitaddress.org
 
-It is a commandline script which either generates a fresh random private key or accepts a user-supplied key, then
-creates a jpg with a bitcoin address and a bip38 address with corresponding QR codes (with error protection) painted
-on it.
+create-bip38.py (create paper wallet)
+- minimal code, easy to verify
+- randomly generates new bitcoin address/key
+- emits image file with encrypted key (limit spyware)
+- add optional description and "passphrase hint"
 
-BIP38 is a protocol which encrypts a bitcoin private key with a pass phrase (using AES and scrypt) such that
-brute forcing will be very difficult / time consuming. Thus it is an elegant form of 2-factor on a bitcoin paper 
-wallet. The benefit is that the bitcoin funds are not at major risk if the key is found, whilst also being easily
-imported into a variety of popular bitcoin wallets via a sweep of the QR code.
+unlock-bip38.py
+- decrypt private key from passphrase and encrypted key
 
-This script also allow user generated bip38 keys for user private keys to allow the code+address to be sent to 3rd
-parties safely (for example to create a metal laser engraved wallet).
 
-Issues:
-
-1) probably should update the code to export a pdf file.
+Credit: Forked from https://github.com/surg0r/bip38
