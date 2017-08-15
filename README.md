@@ -7,8 +7,6 @@ BIP38 is a protocol which encrypts a bitcoin private key with a pass phrase (usi
 brute forcing will be very difficult / time consuming. This works with several wallets, and is used at sites 
 like bitcoinpaperwallet.com and bitaddress.org
 
-![sample](https://raw.githubusercontent.com/steve-vincent/bip38/master/screens/sample.jpg)
-
 **create-bip38.py** (create paper wallet)
 - minimal code, easy to verify
 - randomly generates new bitcoin address/key
@@ -19,4 +17,6 @@ like bitcoinpaperwallet.com and bitaddress.org
 - decrypt private key from passphrase and encrypted key
 
 ![terminal](https://raw.githubusercontent.com/steve-vincent/bip38/master/screens/terminal.png)
+
+![sample](https://raw.githubusercontent.com/steve-vincent/bip38/master/screens/sample.jpg)
 
