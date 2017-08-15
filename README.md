@@ -10,8 +10,7 @@ bitaddress.org, and works with several wallet apps.
 **create-bip38.py** (create paper wallet)
 - minimal code, easy to verify
 - randomly generates new bitcoin address/key
-- emits image file with encrypted key (limit spyware)
-- add optional description and "passphrase hint"
+- emits image file with encrypted key (avoids spyware)
 
 **unlock-bip38.py** (decrypt for key)
 - decrypt private key from passphrase and encrypted key
