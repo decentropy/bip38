@@ -62,7 +62,7 @@ img.paste(im2, (im_w+(3*offs),(img_h-im2_h)/2) )
 
 #draw labels
 draw = ImageDraw.Draw(img) 
-font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf",22)
+font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",22)
 fcolor =  (0,0,0)
 draw.text((im_w+(3*offs),(img_h-im_h)/2-10), 'BIP38 Key', fcolor, font)
 draw.text((20, 20), name, fcolor, font)
