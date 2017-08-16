@@ -21,6 +21,6 @@ bitaddress.org, and works with several wallet apps.
 
 **Requirements**
 
-sudo apt-get install python-dev libssl-dev libjpeg-dev zlib1g-dev libpng-dev
+sudo apt-get install python-dev libssl-dev libjpeg-dev zlib1g-dev libpng-dev libfreetype6-dev
 
 sudo pip install pycrypto scrypt bitcoin base58 pillow
