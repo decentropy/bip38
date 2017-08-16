@@ -9,31 +9,6 @@ import binascii
 import base58
 
 
-# BIP0038 proposal test cases for non-ec multiply mode verified
-# Additional test cases verified with bitaddress.org
-
-# TODO:
-# verify encrypted privkey checksum before decrypting?
-
-
-tests = [{'passphrase':'TestingOneTwoThree',
-          'expectedpriv':"6PRVWUbkzzsbcVac2qwfssoUJAN1Xhrg6bNk8J7Nzm5H7kxEbn2Nh2ZoGg",
-          'expectedwif':"5KN7MzqK5wt2TP1fQCYyHBtDrXdJuXbUzm4A9rKAteGu3Qi5CVR",
-          'expectedaddr':"1Jq6MksXQVWzrznvZzxkV6oY57oWXD9TXB"},
-         {'passphrase':'Satoshi',
-          'expectedpriv':"6PRNFFkZc2NZ6dJqFfhRoFNMR9Lnyj7dYGrzdgXXVMXcxoKTePPX1dWByq",
-          'expectedwif':"5HtasZ6ofTHP6HCwTqTkLDuLQisYPah7aUnSKfC7h4hMUVw2gi5",
-          'expectedaddr':"1AvKt49sui9zfzGeo8EyL8ypvAhtR2KwbL"}]
-
-compresstests = [{'passphrase':'TestingOneTwoThree',
-                  'expectedpriv':"6PYNKZ1EAgYgmQfmNVamxyXVWHzK5s6DGhwP4J5o44cvXdoY7sRzhtpUeo",
-                  'expectedwif':"L44B5gGEpqEDRS9vVPz7QT35jcBG2r3CZwSwQ4fCewXAhAhqGVpP",
-                  'expectedaddr':"164MQi977u9GUteHr4EPH27VkkdxmfCvGW"},
-                 {'passphrase':'Satoshi',
-                  'expectedpriv':"6PYLtMnXvfG3oJde97zRyLYFZCYizPU5T3LwgdYJz1fRhh16bU7u6PPmY7",
-                  'expectedwif':"KwYgW8gcxj1JWJXhPSu4Fqwzfhp5Yfi42mdYmMa4XqK7NJxXUSK7",
-                  'expectedaddr':"1HmPbwsvG5qJ3KJfxzsZRZWhbm1xBMuS8B"}]
-
 def bip38_encrypt(privkey,passphrase):
     '''BIP0038 non-ec-multiply encryption. Returns BIP0038 encrypted privkey.'''
     privformat = get_privkey_format(privkey)
@@ -62,6 +37,7 @@ def bip38_encrypt(privkey,passphrase):
     encrypted_privkey += hashlib.sha256(hashlib.sha256(encrypted_privkey).digest()).digest()[:4] # b58check for encrypted privkey
     encrypted_privkey = base58.b58encode(encrypted_privkey)
     return encrypted_privkey
+
 
 def bip38_decrypt(encrypted_privkey,passphrase):
     '''BIP0038 non-ec-multiply decryption. Returns WIF privkey.'''
@@ -93,44 +69,8 @@ def bip38_decrypt(encrypted_privkey,passphrase):
         wif = encode_privkey(priv,'wif')
     addr = pubtoaddr(pub)
     if hashlib.sha256(hashlib.sha256(addr).digest()).digest()[0:4] != addresshash:
-        print('Addresshash verification failed! Password is likely incorrect.')
-    return wif
-
-def runtests():
-    for test in tests:
-        passphrase = test.get('passphrase')
-        expectedpriv = test.get('expectedpriv')
-        expectedwif = test.get('expectedwif')
-        expectedaddr = test.get('expectedaddr')
-        print('Testing %s' %(expectedwif))
-        resultpriv = bip38_encrypt(expectedwif,passphrase)
-        if resultpriv == expectedpriv:
-            print('Encryption Success!')
-        decryptedpriv = bip38_decrypt(resultpriv,passphrase)
-        if decryptedpriv == expectedwif:
-            print('Decryption Success!')
-        print('-')*80
-        
-def compresstest():
-    for test in compresstests:
-        passphrase = test.get('passphrase')
-        expectedpriv = test.get('expectedpriv')
-        expectedwif = test.get('expectedwif')
-        expectedaddr = test.get('expectedaddr')
-        print('Testing %s' %(expectedwif))
-        resultpriv = bip38_encrypt(expectedwif,passphrase)
-        if resultpriv == expectedpriv:
-            print('Encryption Success!')
-        else:
-            print('Encryption Failed!')
-            print('Expected %s' %(expectedpriv))
-            print('Returned %s' %(resultpriv))
-        decryptedpriv = bip38_decrypt(resultpriv,passphrase)
-        if decryptedpriv == expectedwif:
-            print('Decryption Success!')
-        else:
-            print('Decryption Failed!')
-            print('Expected %s' %(expectedwif))
-            print('Returned %s' %(decryptedpriv))
-        print('-')*80
+        print('Verification failed. Password is incorrect.')
+        return ''
+    else:
+        return wif
 
