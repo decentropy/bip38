@@ -4,20 +4,27 @@ from qrcode import *
 from PIL import Image
 from PIL import ImageFont
 from PIL import ImageDraw
+import getpass
 
-print "================================================================================="
-print 'BIP38 Create: generate a passphrase encrypted paper wallet'
-print "================================================================================="
+print 'BIP38 generator: Generates paper wallet, encrypted with supplied passphrase.'
+print "====="
 
 print " "
 print 'Enter description for this wallet (optional):'
 name = raw_input()
 
 print " "
-print 'Enter secret passphrase:'
-pasw = raw_input()
+print 'Enter a secret passphrase:'
+pasw = getpass.getpass()
 if not pasw:
-    print 'you must enter a passphrase!'
+    print 'you must enter a passphrase'
+    exit()
+
+print " "
+print 'Re-enter the passphrase:'
+pasw2 = getpass.getpass()
+if pasw != pasw2:
+    print 'passphrase does not match'
     exit()
 
 print " "
@@ -58,12 +65,12 @@ draw = ImageDraw.Draw(img)
 font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf",22)
 fcolor =  (0,0,0)
 draw.text((im_w+(3*offs),(img_h-im_h)/2-10), 'BIP38 Key', fcolor, font)
-draw.text((20, 10), name, fcolor, font)
-draw.text((20, 50), 'ADDRESS:  ' + addr, fcolor, font)
-draw.text((20, (img_h - 80)), 'BIP38 KEY:  ' + bip, fcolor, font)
-draw.text((20, (img_h - 40)), 'PASSPHRASE HINT:  ' + hint, fcolor, font)
+draw.text((20, 20), name, fcolor, font)
+draw.text((20, 70), 'ADDRESS:  ' + addr, fcolor, font)
+draw.text((20, (img_h - 100)), 'BIP38 KEY:  ' + bip, fcolor, font)
+draw.text((20, (img_h - 50)), 'PASSPHRASE HINT:  ' + hint, fcolor, font)
 
-img.save(addr+'.jpg')
+img.save(addr+'.jpg', "JPEG")
 
 print " "
 print 'Bitcoin address:'
@@ -71,4 +78,6 @@ print addr
 print " "
 print "Paper wallet image file created..."
 print " "
+#print 'BIP38 encrypted key:'
+#print bip
 
