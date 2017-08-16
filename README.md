@@ -19,3 +19,16 @@ bitaddress.org, and works with several wallet apps.
 
 ![sample](https://raw.githubusercontent.com/steve-vincent/bip38/master/screens/sample.jpg)
 
+**Requirements**
+
+sudo apt-get install python-dev
+sudo apt-get install libssl-dev
+sudo apt-get install libjpeg-dev
+sudo apt-get install zlib1g-dev
+sudo apt-get install libpng-dev
+
+sudo pip install pycrypto
+sudo pip install scrypt
+sudo pip install bitcoin
+sudo pip install base58
+sudo pip install pillow
