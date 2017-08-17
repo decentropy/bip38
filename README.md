@@ -7,8 +7,8 @@ This is a safe storage method, secured with a passphrase even if a stranger foun
 
 **create-bip38.py** (create paper wallet)
 - minimal code, easy to verify
-- randomly generates new bitcoin address/key
-- emits image file with passphrase encrypted key (avoids spyware)
+- randomly generates bitcoin address, and passphrase encrypts key
+- emits a paper wallet image file (if concerned of screen capture spyware)
 
 **unlock-bip38.py** (decrypt for key)
 - decrypt private key from passphrase and encrypted key
