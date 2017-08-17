@@ -21,11 +21,8 @@ This is a safe storage method, secured with a passphrase even if a stranger find
 
 Python 2.7
 
-Required packages
-sudo apt-get install python-dev libssl-dev libjpeg-dev zlib1g-dev libpng-dev libfreetype6-dev
+Required packages: (apt-get install) python-dev libssl-dev libjpeg-dev zlib1g-dev libpng-dev libfreetype6-dev
 
-Required modules
-sudo pip install pycrypto scrypt bitcoin base58 pillow
-
+Required modules: (pip install) pycrypto scrypt bitcoin base58 pillow
 
 (Credit: https://github.com/surg0r/bip38)
