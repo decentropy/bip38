@@ -1,6 +1,6 @@
 # BIP38 Paper Wallet Creator
 
-BIP38 is a protocol which encrypts a bitcoin private key with a passphrase (using AES and scrypt), such that brute forcing is impossibly time consuming. BIP38 works with several wallet apps, and can be created at websites like bitcoinpaperwallet.com and bitaddress.org, but (for various reasons) one might prefer not to manage keys in a web browser. This python 2.7 script generates BIP38 encrypted paper wallets, secured with a passphrase even if a stranger found it.
+BIP38 is a protocol which encrypts a bitcoin private key with a passphrase (using AES and scrypt), such that brute forcing is impossibly time consuming. BIP38 works with several wallet apps, and can be created at websites like bitcoinpaperwallet.com and bitaddress.org, but (for various reasons) one may prefer to not create keys in a web browser. This python 2.7 script generates BIP38 encrypted paper wallets, secured with a passphrase even if a stranger found it.
 
 **create-bip38.py** (create paper wallet)
 - minimal code, easy to verify
