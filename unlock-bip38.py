@@ -2,9 +2,10 @@ from bip38 import *
 from bitcoin import *
 
 
-print 'BIP38 Unlock: decrypt private key from passphrase encrypted key.'
-print "====="
-print "(Always ensure security and privacy before exposing private keys)"
+print "==============================================================="
+print ' BIP38 Unlock: decrypt a passphrase encrypted private key.'
+print " (Always protect your private keys!)"
+print "==============================================================="
 
 print " "
 print 'Enter BIP38 encrypted key:'
