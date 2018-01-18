@@ -14,6 +14,11 @@ BIP38 is a protocol which encrypts a bitcoin private key with a passphrase (usin
 
 ![sample](https://raw.githubusercontent.com/steve-vincent/bip38/master/screens/sample.jpg)
 
+
+**keygen.py** (simple vanity address generator)
+- edit match string in script, then run
+
+
 **Requirements**
 
 Python 2.7
