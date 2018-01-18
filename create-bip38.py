@@ -6,12 +6,23 @@ from PIL import ImageFont
 from PIL import ImageDraw
 import getpass
 
-print 'BIP38 generator: Generates paper wallet, encrypted with supplied passphrase.'
-print "====="
+print "==============================================================="
+print ' BIP38 generator: Create paper wallet, encrypted with passphrase.'
+print "==============================================================="
 
 print " "
 print 'Enter description for this wallet (optional):'
 name = raw_input()
+
+print " "
+print 'Enter a WIF format private key (optional):'
+wif = raw_input()
+if not wif:
+    #randomkey = binascii.hexlify(os.urandom(32)).decode()
+    wif = encode_privkey(random_key(), 'wif') #private key (WIF)
+    print("* generated new key *")
+
+addr = privtoaddr(wif)
 
 print " "
 print 'Enter a secret passphrase:'
@@ -27,17 +38,12 @@ if pasw != pasw2:
     print 'passphrase does not match'
     exit()
 
+#encrypt
+bip = bip38_encrypt(wif, pasw)
+
 print " "
 print 'Enter passphrase hint (recommended):'
 hint = raw_input()
-
-priv = random_key() #private key (hex)
-priv2 = decode_privkey(priv,'hex') #private key (raw)'
-wif = encode_privkey(priv, 'wif') #private key (WIF)
-
-#encrypt
-addr = privtoaddr(priv)
-bip = bip38_encrypt(priv,pasw)
 
 #image...
 img = Image.open("background.jpg") #around 1000 x 500
@@ -62,7 +68,7 @@ img.paste(im2, (im_w+(3*offs),(img_h-im2_h)/2) )
 
 #draw labels
 draw = ImageDraw.Draw(img) 
-font = ImageFont.truetype("/usr/share/fonts/truetype/freefont/FreeSansBold.ttf",22)
+font = ImageFont.truetype("/usr/share/fonts/truetype/msttcorefonts/Arial_Bold.ttf",22)
 fcolor =  (0,0,0)
 draw.text((im_w+(3*offs),(img_h-im_h)/2-10), 'BIP38 Key', fcolor, font)
 draw.text((20, 20), name, fcolor, font)
@@ -73,11 +79,11 @@ draw.text((20, (img_h - 50)), 'PASSPHRASE HINT:  ' + hint, fcolor, font)
 img.save(addr+'.jpg', "JPEG")
 
 print " "
-print 'Bitcoin address:'
-print addr
+print "==============================================================="
+print " Encrypted paper wallet (image file) created."
 print " "
-print "Paper wallet image file created..."
+print 'Bitcoin address:' + addr
+print 'Encrypted key:' + bip
 print " "
-#print 'BIP38 encrypted key:'
-#print bip
-
+print " (To decrypt, run 'python unlock-bip38.py')"
+print "==============================================================="
