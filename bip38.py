@@ -28,7 +28,6 @@ def bip38_encrypt(privkey, passphrase):
     pubkey = privtopub(privkey)
     addr = pubtoaddr(pubkey)
     addresshash = hashlib.sha256(hashlib.sha256(addr.encode('utf-8')).digest()).digest()[0:4]
-    # imprimir addresshash para ver que es lo que se esta obteniendo pero en texto
     addreshash_text = binascii.hexlify(addresshash)
     key = scrypt.hash(passphrase, addresshash, 16384, 8, 8)
     derivedhalf1 = key[0:32]
