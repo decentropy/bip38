@@ -1,0 +1,5 @@
+scrypt>=0.8.24
+base58>=2.1.1
+crypto>=1.4.1
+bitcoin>=1.1.42
+pycryptodome>=3.9.9
