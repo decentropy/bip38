@@ -1,13 +1,10 @@
 #!/usr/bin/python
 #import Crypto
 
-from Crypto.Cipher import AES
-import scrypt
-import hashlib
-from bitcoin import *
-import binascii
 import base58
-from charset_normalizer import from_bytes
+import scrypt
+from Crypto.Cipher import AES
+from bitcoin import *
 
 
 def bip38_encrypt(privkey, passphrase):
