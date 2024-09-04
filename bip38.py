@@ -30,7 +30,6 @@ def bip38_encrypt(privkey, passphrase):
     derivedhalf1 = key[0:32]
     derivedhalf2 = key[32:64]
     aes = AES.new(derivedhalf2, AES.MODE_ECB)
-
     encryptedhalf1 = aes.encrypt(binascii.unhexlify('%0.32x' % (int(privkey[0:32], 16) ^ int(binascii.hexlify(derivedhalf1[0:16]), 16))))
     encryptedhalf2 = aes.encrypt(binascii.unhexlify('%0.32x' % (int(privkey[32:64], 16) ^ int(binascii.hexlify(derivedhalf1[16:32]), 16))))
     encrypted_privkey = (b'\x01\x42' + flagbyte.encode('latin1') + addresshash + encryptedhalf1 + encryptedhalf2)
