@@ -26,19 +26,13 @@ def bip38_encrypt(privkey, passphrase):
         privkey = encode_privkey(privkey, 'hex')
         privformat = get_privkey_format(privkey)
     pubkey = privtopub(privkey)
-    print("pubkey: ",pubkey)
     addr = pubtoaddr(pubkey)
-    print("addr: ",addr)
     addresshash = hashlib.sha256(hashlib.sha256(addr.encode('utf-8')).digest()).digest()[0:4]
     # imprimir addresshash para ver que es lo que se esta obteniendo pero en texto
     addreshash_text = binascii.hexlify(addresshash)
-    print("addresshash: ",addreshash_text)
     key = scrypt.hash(passphrase, addresshash, 16384, 8, 8)
-    print("key: ",key)
     derivedhalf1 = key[0:32]
-    print("derivedhalf1: ",derivedhalf1)
     derivedhalf2 = key[32:64]
-    print("derivedhalf2: ",derivedhalf2)
     aes = AES.new(derivedhalf2, AES.MODE_ECB)
 
     encryptedhalf1 = aes.encrypt(binascii.unhexlify('%0.32x' % (int(privkey[0:32], 16) ^ int(binascii.hexlify(derivedhalf1[0:16]), 16))))
